@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="--title-font: 'Urbanist',sans-serif;"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fraganz — Perfumes Importados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;family=Urbanist:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;family=Cormorant+Garamond:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0908;
+    --surface:#151310;
+    --surface-2:#1E1B16;
+    --border:#2A251E;
+    --red:#EDEDEB;
+    --gold:#9A9A96;
+    --accent-ink:#0A0A0A;
+    --text:#EDE8DF;
+    --muted:#8C857A;
+    --radius:14px;
+    --title-font:'Fraunces',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+
+  .gota{display:inline-block;width:.5em;height:.7em;background:var(--red);
+    border-radius:0 55% 55% 55%;transform:rotate(45deg);vertical-align:middle;}
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,9,8,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{
+    max-width:1180px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .logo-img{height:32px;width:auto;display:block;}
+  .header-right{display:flex;align-items:center;gap:10px;}
+  .header-cta{
+    display:flex;align-items:center;gap:8px;
+    background:var(--red);color:var(--accent-ink);padding:10px 18px;
+    border-radius:999px;font-weight:700;font-size:0.85rem;
+    border:none;transition:transform .15s ease, background .2s ease;
+  }
+  .header-cta:hover{background:#c9c9c5;transform:translateY(-1px);}
+  .admin-toggle{
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:9px 14px;border-radius:999px;font-size:0.78rem;font-weight:700;
+    transition:all .15s ease;
+  }
+  .admin-toggle:hover{border-color:var(--gold);color:var(--text);}
+  .admin-toggle-footer{
+    display:inline-block;margin-top:14px;background:none;border:none;
+    color:var(--border);font-size:0.68rem;letter-spacing:.03em;
+    opacity:0.45;cursor:pointer;padding:4px;transition:opacity .2s ease;
+  }
+  .admin-toggle-footer:hover{opacity:0.85;}
+
+  .hero{
+    max-width:1180px;margin:0 auto;padding:64px 24px 44px;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:500;font-style:italic;
+    font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 span{color:var(--red);font-style:normal;}
+  .hero p{color:var(--muted);max-width:420px;margin-top:18px;font-size:1.02rem;}
+  .hero-note{
+    font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--gold);
+    text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;
+  }
+  .hero-meta{
+    display:flex;gap:28px;font-family:'Space Mono',monospace;font-size:0.78rem;
+    color:var(--muted);border-left:2px solid var(--border);padding-left:20px;
+  }
+  .hero-meta b{color:var(--text);display:block;font-size:1.3rem;font-family:'Fraunces',serif;font-weight:600;}
+
+  .filters{
+    max-width:1180px;margin:0 auto;padding:0 24px 28px;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    border-bottom:1px solid var(--border);padding-bottom:28px;
+  }
+  .chip{
+    background:var(--surface);border:1px solid var(--border);color:var(--muted);
+    padding:8px 16px;border-radius:999px;font-size:0.82rem;font-weight:600;
+    transition:all .15s ease;white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--text);}
+  .chip.active{background:var(--text);color:var(--bg);border-color:var(--text);}
+  .search-wrap{margin-left:auto;position:relative;min-width:220px;flex:1;max-width:280px;}
+  .search-wrap input{
+    width:100%;background:var(--surface);border:1px solid var(--border);
+    color:var(--text);padding:9px 14px;border-radius:999px;font-size:0.85rem;
+  }
+  .search-wrap input::placeholder{color:var(--muted);}
+
+  .grid-wrap{max-width:1180px;margin:0 auto;padding:32px 24px 80px;}
+  .count{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--muted);
+    text-transform:uppercase;letter-spacing:0.1em;margin-bottom:20px;}
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;
+  }
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;display:flex;flex-direction:column;gap:14px;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--gold);}
+  .card-media{
+    position:relative;width:100%;height:200px;border-radius:10px;overflow:hidden;
+    background:var(--bg);display:flex;align-items:center;justify-content:center;
+  }
+  .card-media img{width:100%;height:100%;object-fit:contain;display:block;padding:10px;box-sizing:border-box;}
+  .card-media .bottle{width:auto;height:78%;}
+  .fam-tag{
+    position:absolute;top:10px;left:10px;
+    background:rgba(10,10,10,0.72);backdrop-filter:blur(4px);
+    font-family:'Space Mono',monospace;font-size:0.65rem;text-transform:uppercase;
+    letter-spacing:0.08em;padding:4px 9px;border-radius:6px;
+    display:inline-flex;align-items:center;gap:6px;color:var(--muted);
+    border:1px solid var(--border);
+  }
+  .fam-dot{width:7px;height:7px;border-radius:50%;}
+  .stock-tag{
+    position:absolute;top:10px;right:10px;
+    background:rgba(10,10,10,0.72);backdrop-filter:blur(4px);
+    font-family:'Space Mono',monospace;font-size:0.65rem;text-transform:uppercase;
+    letter-spacing:0.08em;padding:4px 9px;border-radius:6px;
+    display:inline-flex;align-items:center;gap:5px;
+    border:1px solid var(--border);
+  }
+  .stock-tag.pronta{color:#B7D9B1;}
+  .stock-tag.encomenda{color:#E0C27A;}
+  .stock-tag svg{width:11px;height:11px;flex-shrink:0;}
+  .card h3{font-family:var(--title-font);font-size:1.2rem;font-weight:600;}
+  .card .gender{color:var(--muted);font-size:0.78rem;}
+  .card p.desc{color:var(--muted);font-size:0.85rem;}
+  .pyramid{display:flex;flex-direction:column;gap:6px;margin-top:2px;}
+  .pyramid-row{display:flex;gap:8px;align-items:baseline;}
+  .pyramid-label{
+    font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--gold);
+    text-transform:uppercase;letter-spacing:0.06em;width:52px;flex-shrink:0;
+  }
+  .pyramid-notes{font-size:0.78rem;color:var(--text);opacity:0.85;}
+  .card-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid var(--border);padding-top:14px;margin-top:auto;
+  }
+  .price{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;}
+  .price small{font-family:'Manrope',sans-serif;color:var(--muted);font-size:0.72rem;font-weight:500;}
+  .wa-btn{
+    display:flex;align-items:center;gap:6px;background:var(--surface-2);
+    border:1px solid var(--border);color:var(--text);padding:9px 14px;
+    border-radius:999px;font-size:0.78rem;font-weight:700;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .wa-btn:hover{background:var(--red);border-color:var(--red);color:var(--accent-ink);}
+  .no-results{color:var(--muted);text-align:center;padding:60px 0;font-family:'Space Mono',monospace;font-size:0.85rem;}
+
+  .float-wa{
+    position:fixed;bottom:22px;right:22px;z-index:60;
+    background:var(--red);color:var(--accent-ink);width:56px;height:56px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5);
+    transition:transform .2s ease;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+
+  footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center;
+    color:var(--muted);font-size:0.8rem;}
+  footer .logo-img{height:20px;margin:0 auto 10px;opacity:0.7;}
+
+  /* ---------- admin panel ---------- */
+  .admin-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99;
+    display:none;
+  }
+  .admin-overlay.open{display:block;}
+  .admin-panel{
+    position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);
+    background:var(--surface);border-left:1px solid var(--border);
+    z-index:100;transform:translateX(100%);transition:transform .25s ease;
+    overflow-y:auto;padding:24px;
+  }
+  .admin-panel.open{transform:translateX(0);}
+  .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+  .admin-header h2{font-family:'Fraunces',serif;font-size:1.3rem;}
+  .close-btn{background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+    width:32px;height:32px;border-radius:50%;font-size:1rem;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:0.75rem;color:var(--muted);margin-bottom:5px;
+    font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;}
+  .field input, .field select, .field textarea{
+    width:100%;background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+    padding:9px 12px;border-radius:8px;font-size:0.88rem;font-family:'Manrope',sans-serif;
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .img-preview{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-top:8px;
+    border:1px solid var(--border);display:none;}
+  .btn-primary{
+    width:100%;background:var(--red);color:var(--accent-ink);border:none;padding:12px;
+    border-radius:8px;font-weight:700;font-size:0.9rem;margin-top:6px;
+  }
+  .btn-primary:hover{background:#c9c9c5;}
+  .btn-secondary{
+    width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);
+    padding:11px;border-radius:8px;font-weight:700;font-size:0.85rem;margin-top:8px;
+  }
+  .btn-secondary:hover{border-color:var(--gold);}
+  .admin-divider{border-top:1px solid var(--border);margin:22px 0;padding-top:20px;}
+  .admin-list-item{
+    display:flex;align-items:center;gap:10px;padding:10px;background:var(--surface-2);
+    border-radius:8px;margin-bottom:8px;
+  }
+  .admin-list-item img, .admin-list-item .thumb-fallback{
+    width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--border);
+  }
+  .admin-list-item .info{flex-grow:1;min-width:0;}
+  .admin-list-item .info b{display:block;font-size:0.85rem;}
+  .admin-list-item .info span{font-size:0.72rem;color:var(--muted);}
+  .admin-list-item .actions{display:flex;gap:6px;}
+  .admin-list-item button{
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    width:28px;height:28px;border-radius:6px;font-size:0.8rem;
+  }
+  .admin-list-item button:hover{border-color:var(--gold);color:var(--text);}
+  .admin-note{font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:14px;
+    background:var(--surface-2);padding:12px;border-radius:8px;border:1px solid var(--border);}
+  .family-color-row{display:flex;align-items:center;justify-content:space-between;
+    gap:10px;padding:7px 0;font-size:0.85rem;}
+  .family-color-row input[type="color"]{width:38px;height:28px;border:none;
+    border-radius:6px;background:none;cursor:pointer;padding:0;}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;gap:24px;}
+    .hero-meta{border-left:none;padding-left:0;padding-top:16px;border-top:1px solid var(--border);}
+    .search-wrap{max-width:100%;order:10;}
+    .field-row{grid-template-columns:1fr;}
+  }
+</style>
+<link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"></head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img class="logo-img" src="images/logo-fraganz.png" alt="Fraganz">
+    <div class="header-right">
+      <a class="header-cta" id="headerWa" href="https://wa.me/5583993744321?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20da%20Fraganz%20e%20quero%20saber%20mais%20sobre%20os%20perfumes." target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="hero-note">Perfumaria importada</div>
+    <h1>Elegância que <span>se sente</span><br>antes de ser vista.</h1>
+    <p>Catálogo com perfumes importados selecionados. Escolha pela família olfativa, veja a pirâmide de notas e feche o pedido direto no WhatsApp.</p>
+  </div>
+  <div class="hero-meta">
+    <div><b id="metaCount">4</b>fragrâncias</div>
+    <div><b>100%</b>importado</div>
+    <div><b>DDD 83</b>envio p/ todo BR</div>
+  </div>
+</section>
+
+<div class="filters" id="filters"><button class="chip active" data-family="Todos">Todos</button><button class="chip " data-family="Amadeirado">Amadeirado</button><button class="chip " data-family="Oriental">Oriental</button><div class="search-wrap"><input type="text" id="searchInput" placeholder="Buscar por nome..."></div></div>
+
+<div class="grid-wrap">
+  <div class="count" id="resultCount">4 fragrâncias encontradas</div>
+  <div class="grid" id="grid">
+      <div class="card">
+        <div class="card-media">
+          <img class="bottle" src="images/perfume-azul.png" alt="Club de Nuit intense man">
+          <span class="fam-tag"><span class="fam-dot" style="background:#613f29"></span>Amadeirado</span>
+          <span class="stock-tag pronta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"></path></svg>Pronta entrega</span>
+        </div>
+        <div>
+          <h3>Club de Nuit intense man</h3>
+          <div class="gender">Masculino · 105ml</div>
+        </div>
+        <p class="desc">Fragrância intensa, sofisticada e marcante, perfeita para noites e ocasiões especiais.</p>
+        <div class="pyramid">
+          <div class="pyramid-row"><span class="pyramid-label">Topo</span><span class="pyramid-notes">Limão, Abacaxi, Bergamota, Groselha Preta, Maçã</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Coração</span><span class="pyramid-notes">Bétula, Jasmim, Rosa</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Fundo</span><span class="pyramid-notes">Âmbar, Almíscar, Baunilha, Patchouli</span></div>
+        </div>
+        <div class="card-bottom">
+          <div class="price">R$ 249,90<br><small>105ml</small></div>
+          <a class="wa-btn" href="https://wa.me/5583993744321?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20da%20Fraganz%20e%20quero%20saber%20mais%20sobre%20o%20perfume%20Club%20de%20Nuit%20intense%20man%20(105ml)." target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 20 11.94a7.9 7.9 0 0 0-2.4-5.62z"></path></svg>
+            Falar
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">
+          <img class="bottle" src="images/perfume-rosa.png" alt="Lattafa Asad Eau de Parfum">
+          <span class="fam-tag"><span class="fam-dot" style="background:#d1ac47"></span>Oriental</span>
+          <span class="stock-tag pronta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"></path></svg>Pronta entrega</span>
+        </div>
+        <div>
+          <h3>Lattafa Asad Eau de Parfum</h3>
+          <div class="gender">Masculino · 100ml</div>
+        </div>
+        <p class="desc">Quente, intenso e sofisticado, ideal para noites e clima ameno.</p>
+        <div class="pyramid">
+          <div class="pyramid-row"><span class="pyramid-label">Topo</span><span class="pyramid-notes">Pimenta Preta, Abacaxi, Tabaco</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Coração</span><span class="pyramid-notes">Café, Íris, Patchouli</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Fundo</span><span class="pyramid-notes">Baunilha, Âmbar, Madeira Seca, Benjoim, Ládano</span></div>
+        </div>
+        <div class="card-bottom">
+          <div class="price">R$ 239,90<br><small>100ml</small></div>
+          <a class="wa-btn" href="https://wa.me/5583993744321?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20da%20Fraganz%20e%20quero%20saber%20mais%20sobre%20o%20perfume%20Lattafa%20Asad%20Eau%20de%20Parfum%20(100ml)." target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 20 11.94a7.9 7.9 0 0 0-2.4-5.62z"></path></svg>
+            Falar
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">
+          <img class="bottle" src="images/perfume-dourado.png" alt="Lattafa Yara Eau de Parfum">
+          <span class="fam-tag"><span class="fam-dot" style="background:#d1ac47"></span>Oriental</span>
+          <span class="stock-tag pronta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"></path></svg>Pronta entrega</span>
+        </div>
+        <div>
+          <h3>Lattafa Yara Eau de Parfum</h3>
+          <div class="gender">Feminino · 100ml</div>
+        </div>
+        <p class="desc">Doce, cremoso e delicado, perfeito para o dia a dia e ocasiões especiais.</p>
+        <div class="pyramid">
+          <div class="pyramid-row"><span class="pyramid-label">Topo</span><span class="pyramid-notes">Orquídea, Heliotrópio, Tangerina</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Coração</span><span class="pyramid-notes">Acorde Gourmand, Frutas Tropicais</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Fundo</span><span class="pyramid-notes">Baunilha, Almíscar, Sândalo</span></div>
+        </div>
+        <div class="card-bottom">
+          <div class="price">R$ 219,90<br><small>100ml</small></div>
+          <a class="wa-btn" href="https://wa.me/5583993744321?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20da%20Fraganz%20e%20quero%20saber%20mais%20sobre%20o%20perfume%20Lattafa%20Yara%20Eau%20de%20Parfum%20(100ml)." target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 20 11.94a7.9 7.9 0 0 0-2.4-5.62z"></path></svg>
+            Falar
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">
+          <img class="bottle" src="images/frasco-vidro.jpg" alt="a">
+          <span class="fam-tag"><span class="fam-dot" style="background:#613f29"></span>Amadeirado</span>
+          <span class="stock-tag pronta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"></path></svg>Pronta entrega</span>
+        </div>
+        <div>
+          <h3>a</h3>
+          <div class="gender">Masculino · 0ml</div>
+        </div>
+        <p class="desc"></p>
+        <div class="pyramid">
+          <div class="pyramid-row"><span class="pyramid-label">Topo</span><span class="pyramid-notes"></span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Coração</span><span class="pyramid-notes"></span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Fundo</span><span class="pyramid-notes"></span></div>
+        </div>
+        <div class="card-bottom">
+          <div class="price">R$ 0,00<br><small>0ml</small></div>
+          <a class="wa-btn" href="https://wa.me/5583993744321?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20da%20Fraganz%20e%20quero%20saber%20mais%20sobre%20o%20perfume%20a%20(0ml)." target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 20 11.94a7.9 7.9 0 0 0-2.4-5.62z"></path></svg>
+            Falar
+          </a>
+        </div>
+      </div></div>
+</div>
+
+<a class="float-wa" id="floatWa" href="https://wa.me/5583993744321?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20da%20Fraganz%20e%20quero%20saber%20mais%20sobre%20os%20perfumes." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#0A0A0A"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 20 11.94a7.9 7.9 0 0 0-2.4-5.62zm-5.55 12.2h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.58 6.58 0 0 1 10.24-8.17 6.5 6.5 0 0 1 1.94 4.65 6.6 6.6 0 0 1-6.58 6.6zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.32-.1-.45.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.82-.3-1.56-.96a5.85 5.85 0 0 1-1.08-1.34c-.11-.2 0-.3.1-.4.1-.1.23-.26.34-.4.11-.13.15-.22.23-.37.07-.15.04-.28-.03-.4-.07-.13-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.19 0-.48.07-.74.35-.26.28-1 1-1 2.4 0 1.42 1.03 2.8 1.17 3 .14.19 1.94 2.97 4.7 4.05 2.75 1.08 2.75.72 3.25.68.5-.05 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.45-.28z"></path></svg>
+</a>
+
+<div class="admin-overlay" id="adminOverlay"></div>
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <h2 id="formTitle">Adicionar produto</h2>
+    <button class="close-btn" id="closeAdmin">✕</button>
+  </div>
+
+  <div class="admin-note">
+    Adicione, edite ou remova produtos aqui. Quando terminar, clique em <b>"Baixar arquivo atualizado"</b>: o navegador baixa o HTML <b>e</b> as fotos novas separadamente (nada de base64 dentro do código). É só mover as fotos baixadas pra pasta <b>images/</b> do site e subir tudo (HTML + pasta images/) pro GitHub.
+  </div>
+
+  <div class="field">
+    <label>Foto do produto (opcional)</label>
+    <input type="file" id="fImage" accept="image/*">
+    <img id="imgPreview" class="img-preview" src="images/frasco-spray.jpg" data-pending="images/frasco-spray.jpg" style="display: block;">
+  </div>
+  <div class="field">
+    <label>Nome</label>
+    <input type="text" id="fName" placeholder="Ex: Noir Velours">
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>Família</label>
+      <select id="fFamily">
+        <option>Amadeirado</option>
+        <option>Floral</option>
+        <option>Cítrico</option>
+        <option>Oriental</option>
+        <option>Aromático</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Gênero</label>
+      <select id="fGender">
+        <option>Masculino</option>
+        <option>Feminino</option>
+        <option>Unissex</option>
+      </select>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>Estoque</label>
+      <select id="fStock">
+        <option value="pronta">Pronta entrega</option>
+        <option value="encomenda">Sob encomenda</option>
+      </select>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>ML</label>
+      <input type="number" id="fMl" placeholder="100">
+    </div>
+    <div class="field">
+      <label>Preço (R$)</label>
+      <input type="number" step="0.01" id="fPrice" placeholder="189.90">
+    </div>
+  </div>
+  <div class="field">
+    <label>Descrição curta</label>
+    <input type="text" id="fDesc" placeholder="Ex: Intenso e envolvente, ideal pra noite.">
+  </div>
+  <div class="field">
+    <label>Notas de topo (separadas por vírgula)</label>
+    <input type="text" id="fTop" placeholder="Bergamota, Pimenta rosa">
+  </div>
+  <div class="field">
+    <label>Notas de coração</label>
+    <input type="text" id="fHeart" placeholder="Cedro, Couro">
+  </div>
+  <div class="field">
+    <label>Notas de fundo</label>
+    <input type="text" id="fBase" placeholder="Âmbar, Musk">
+  </div>
+
+  <button class="btn-primary" id="saveProduct">Adicionar produto</button>
+  <button class="btn-secondary" id="cancelEdit" style="display: none;">Cancelar edição</button>
+
+  <div class="admin-divider">
+    <label style="display:block;font-size:0.75rem;color:var(--muted);margin-bottom:10px;
+      font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+      Fonte dos títulos
+    </label>
+    <select id="fTitleFont">
+      <option value="'Fraunces',serif">Fraunces (padrão)</option>
+      <option value="'Urbanist',sans-serif">Urbanist</option>
+      <option value="'Playfair Display',serif">Playfair Display</option>
+      <option value="'Cormorant Garamond',serif">Cormorant Garamond</option>
+      <option value="'Manrope',sans-serif">Manrope</option>
+      <option value="'Space Mono',monospace">Space Mono</option>
+    </select>
+
+    <label style="display:block;font-size:0.75rem;color:var(--muted);margin:16px 0 10px;
+      font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+      Cores das categorias
+    </label>
+    <div id="familyColorList"><div class="family-color-row"><span>Amadeirado</span><input type="color" data-family="Amadeirado" value="#613f29"></div><div class="family-color-row"><span>Oriental</span><input type="color" data-family="Oriental" value="#d1ac47"></div></div>
+  </div>
+
+  <div class="admin-divider">
+    <label style="display:block;font-size:0.75rem;color:var(--muted);margin-bottom:10px;
+      font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+      Produtos atuais (<span id="adminCount">4</span>)
+    </label>
+    <div id="adminList">
+      <div class="admin-list-item">
+        <img src="images/perfume-azul.png">
+        <div class="info"><b>Club de Nuit intense man</b><span>Amadeirado · R$ 249,90</span></div>
+        <div class="actions">
+          <button data-edit="p1783320149745" title="Editar">✎</button>
+          <button data-remove="p1783320149745" title="Remover">🗑</button>
+        </div>
+      </div>
+      <div class="admin-list-item">
+        <img src="images/perfume-rosa.png">
+        <div class="info"><b>Lattafa Asad Eau de Parfum</b><span>Oriental · R$ 239,90</span></div>
+        <div class="actions">
+          <button data-edit="p1783322611615" title="Editar">✎</button>
+          <button data-remove="p1783322611615" title="Remover">🗑</button>
+        </div>
+      </div>
+      <div class="admin-list-item">
+        <img src="images/perfume-dourado.png">
+        <div class="info"><b>Lattafa Yara Eau de Parfum</b><span>Oriental · R$ 219,90</span></div>
+        <div class="actions">
+          <button data-edit="p1783322911126" title="Editar">✎</button>
+          <button data-remove="p1783322911126" title="Remover">🗑</button>
+        </div>
+      </div>
+      <div class="admin-list-item">
+        <img src="images/frasco-vidro.jpg">
+        <div class="info"><b>a</b><span>Amadeirado · R$ 0,00</span></div>
+        <div class="actions">
+          <button data-edit="p1783368255842" title="Editar">✎</button>
+          <button data-remove="p1783368255842" title="Remover">🗑</button>
+        </div>
+      </div></div>
+  </div>
+
+  <div class="admin-divider">
+    <button class="btn-primary" id="downloadFile">⬇ Baixar arquivo atualizado</button>
+    <button class="btn-secondary" id="resetDraft">Restaurar catálogo original</button>
+  </div>
+</div>
+
+<footer>
+  <img class="logo-img" src="images/logo-fraganz.png" alt="Fraganz">
+  Perfumes importados · pedidos e dúvidas sempre pelo WhatsApp
+  <br>
+  <button class="admin-toggle-footer" id="adminToggle">·</button>
+</footer>
+
+<script>
+/* ==========================================================================
+   WHATSAPP — edite seu número aqui (formato: código do país + DDD + número)
+   ========================================================================== */
+const WHATSAPP_NUMBER = "5583993744321";
+
+/* ==========================================================================
+   ACESSO AO PAINEL DE EDIÇÃO
+   - ADMIN_KEY: acrescente ?admin=SUACHAVE na URL pra fazer o botão aparecer.
+     Ex: https://seusite.netlify.app/?admin=fraganz2026
+   - ADMIN_PASSWORD: senha pedida ao clicar em "Editar catálogo".
+   ========================================================================== */
+const ADMIN_KEY = "fraganz2026";
+const ADMIN_PASSWORD = "rmkfodeboladin123";
+
+/* ==========================================================================
+   IMAGENS NOVAS — evita base64 gigante dentro do HTML
+   Toda foto enviada pelo painel vira um arquivo separado pra baixar (não fica
+   embutida no código). Ao clicar em "Baixar arquivo atualizado", o navegador
+   baixa a foto junto com o HTML — é só mover ela pra pasta "images/" do site.
+   ========================================================================== */
+let PENDING_IMAGES = JSON.parse(localStorage.getItem('fraganz_pending_images') || '{}');
+function savePendingImages(){
+  localStorage.setItem('fraganz_pending_images', JSON.stringify(PENDING_IMAGES));
+}
+function slugify(str){
+  return (str || 'produto').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-+|-+$)/g,'') || 'produto';
+}
+function dataURLtoBlob(dataUrl){
+  const [header, base64] = dataUrl.split(',');
+  const mime = (header.match(/data:(.*?);base64/) || [,'image/png'])[1];
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++) bytes[i] = binary.charCodeAt(i);
+  return new Blob([bytes], {type: mime});
+}
+// Enquanto a foto nova não foi baixada+movida pra pasta images/, mostra o preview
+// a partir da memória (PENDING_IMAGES). Depois que o arquivo existir de verdade,
+// isso deixa de ser necessário (mas não atrapalha, o resolveImageSrc já ignora).
+function resolveImageSrc(path, forExport){
+  if(!path) return path;
+  if(forExport) return path;
+  const fname = path.replace(/^images\//,'');
+  return PENDING_IMAGES[fname] || path;
+}
+
+/* PRODUCTS_START */
+const PRODUCTS_SEED = [
+  {
+    "name": "Club de Nuit intense man",
+    "family": "Amadeirado",
+    "gender": "Masculino",
+    "ml": 105,
+    "price": 249.9,
+    "desc": "Fragrância intensa, sofisticada e marcante, perfeita para noites e ocasiões especiais.",
+    "image": "images/perfume-azul.png",
+    "notes": {
+      "top": [
+        "Limão",
+        "Abacaxi",
+        "Bergamota",
+        "Groselha Preta",
+        "Maçã"
+      ],
+      "heart": [
+        "Bétula",
+        "Jasmim",
+        "Rosa"
+      ],
+      "base": [
+        "Âmbar",
+        "Almíscar",
+        "Baunilha",
+        "Patchouli"
+      ]
+    },
+    "stock": "pronta",
+    "id": "p1783320149745"
+  },
+  {
+    "name": "Lattafa Asad Eau de Parfum",
+    "family": "Oriental",
+    "gender": "Masculino",
+    "ml": 100,
+    "price": 239.9,
+    "desc": "Quente, intenso e sofisticado, ideal para noites e clima ameno.",
+    "image": "images/perfume-rosa.png",
+    "notes": {
+      "top": [
+        "Pimenta Preta",
+        "Abacaxi",
+        "Tabaco"
+      ],
+      "heart": [
+        "Café",
+        "Íris",
+        "Patchouli"
+      ],
+      "base": [
+        "Baunilha",
+        "Âmbar",
+        "Madeira Seca",
+        "Benjoim",
+        "Ládano"
+      ]
+    },
+    "stock": "pronta",
+    "id": "p1783322611615"
+  },
+  {
+    "name": "Lattafa Yara Eau de Parfum",
+    "family": "Oriental",
+    "gender": "Feminino",
+    "ml": 100,
+    "price": 219.9,
+    "desc": "Doce, cremoso e delicado, perfeito para o dia a dia e ocasiões especiais.",
+    "image": "images/perfume-dourado.png",
+    "notes": {
+      "top": [
+        "Orquídea",
+        "Heliotrópio",
+        "Tangerina"
+      ],
+      "heart": [
+        "Acorde Gourmand",
+        "Frutas Tropicais"
+      ],
+      "base": [
+        "Baunilha",
+        "Almíscar",
+        "Sândalo"
+      ]
+    },
+    "stock": "pronta",
+    "id": "p1783322911126"
+  },
+  {
+    "name": "a",
+    "family": "Amadeirado",
+    "gender": "Masculino",
+    "stock": "pronta",
+    "ml": 0,
+    "price": 0,
+    "desc": "",
+    "image": "images/frasco-vidro.jpg",
+    "notes": {
+      "top": [],
+      "heart": [],
+      "base": []
+    },
+    "id": "p1783368255842"
+  }
+];
+/* PRODUCTS_END */
+
+/* SETTINGS_START */
+const SETTINGS_SEED = {
+  "familyColors": {
+    "Amadeirado": "#613f29",
+    "Floral": "#B8B8B4",
+    "Cítrico": "#8C8C88",
+    "Oriental": "#d1ac47",
+    "Aromático": "#D6D6D2"
+  },
+  "titleFont": "'Urbanist',sans-serif"
+};
+/* SETTINGS_END */
+
+let FAMILY_COLORS = {};
+let TITLE_FONT = "'Fraunces',serif";
+
+function loadSettings(){
+  const draft = localStorage.getItem('fraganz_settings');
+  const settings = draft ? JSON.parse(draft) : JSON.parse(JSON.stringify(SETTINGS_SEED));
+  FAMILY_COLORS = settings.familyColors || {};
+  TITLE_FONT = settings.titleFont || "'Fraunces',serif";
+  document.documentElement.style.setProperty('--title-font', TITLE_FONT);
+}
+function saveSettings(){
+  localStorage.setItem('fraganz_settings', JSON.stringify({
+    familyColors: FAMILY_COLORS,
+    titleFont: TITLE_FONT
+  }));
+}
+function renderFamilyColors(){
+  const list = document.getElementById('familyColorList');
+  if(!list) return;
+  const families = getFamilies().filter(f => f !== "Todos");
+  list.innerHTML = families.map(f => {
+    const color = FAMILY_COLORS[f] || "#8C857A";
+    return `<div class="family-color-row"><span>${f}</span><input type="color" data-family="${f}" value="${color}"></div>`;
+  }).join('');
+  list.querySelectorAll('input[type="color"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      FAMILY_COLORS[inp.dataset.family] = inp.value;
+      saveSettings();
+      renderGrid();
+    });
+  });
+}
+
+let PRODUCTS = [];
+let activeFamily = "Todos";
+let searchTerm = "";
+let editingId = null;
+
+function loadProducts(){
+  const draft = localStorage.getItem('fraganz_draft');
+  PRODUCTS = draft ? JSON.parse(draft) : JSON.parse(JSON.stringify(PRODUCTS_SEED));
+}
+function saveDraft(){
+  localStorage.setItem('fraganz_draft', JSON.stringify(PRODUCTS));
+}
+
+function waLink(text){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+
+function bottleSVG(color){
+  return `<svg class="bottle" viewBox="0 0 56 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="22" y="4" width="12" height="10" rx="2" fill="${color}" opacity="0.9"/>
+    <rect x="24" y="0" width="8" height="6" rx="1.5" fill="${color}"/>
+    <path d="M14 20 C14 15 18 14 28 14 C38 14 42 15 42 20 L44 66 C44 69 41 71 38 71 L18 71 C15 71 12 69 12 66 Z"
+      fill="#1E1B16" stroke="${color}" stroke-width="1.5"/>
+    <path d="M16 30 L40 30 L42 66 C42 68 40 70 38 70 L18 70 C16 70 14 68 14 66 Z" fill="${color}" opacity="0.18"/>
+  </svg>`;
+}
+
+function getFamilies(){
+  return ["Todos", ...new Set(PRODUCTS.map(p=>p.family))];
+}
+
+function renderFilters(){
+  const wrap = document.getElementById('filters');
+  wrap.innerHTML = getFamilies().map(f =>
+    `<button class="chip ${f===activeFamily?'active':''}" data-family="${f}">${f}</button>`
+  ).join('') + `<div class="search-wrap"><input type="text" id="searchInput" placeholder="Buscar por nome..."></div>`;
+
+  wrap.querySelectorAll('.chip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeFamily = btn.dataset.family;
+      renderFilters();
+      renderGrid();
+    });
+  });
+  document.getElementById('searchInput').value = searchTerm;
+  document.getElementById('searchInput').addEventListener('input', (e)=>{
+    searchTerm = e.target.value;
+    renderGrid();
+  });
+}
+
+function renderGrid(forExport){
+  const grid = document.getElementById('grid');
+  const filtered = PRODUCTS.filter(p=>{
+    const matchFamily = activeFamily==="Todos" || p.family===activeFamily;
+    const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchFamily && matchSearch;
+  });
+
+  document.getElementById('resultCount').textContent = `${filtered.length} fragrância${filtered.length===1?'':'s'} encontrada${filtered.length===1?'':'s'}`;
+  document.getElementById('metaCount').textContent = PRODUCTS.length;
+
+  if(filtered.length===0){
+    grid.innerHTML = `<div class="no-results">Nenhum perfume encontrado com esse filtro.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p=>{
+    const color = FAMILY_COLORS[p.family] || "#8C857A";
+    const msg = `Olá! Vim pelo catálogo da Fraganz e quero saber mais sobre o perfume ${p.name} (${p.ml}ml).`;
+    const media = p.image
+      ? `<img class="bottle" src="${resolveImageSrc(p.image, forExport)}" alt="${p.name}">`
+      : bottleSVG(color);
+    const stock = p.stock || "pronta";
+    const stockBadge = stock === "encomenda"
+      ? `<span class="stock-tag encomenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="9"></circle></svg>Sob encomenda</span>`
+      : `<span class="stock-tag pronta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"></path></svg>Pronta entrega</span>`;
+    return `
+      <div class="card">
+        <div class="card-media">
+          ${media}
+          <span class="fam-tag"><span class="fam-dot" style="background:${color}"></span>${p.family}</span>
+          ${stockBadge}
+        </div>
+        <div>
+          <h3>${p.name}</h3>
+          <div class="gender">${p.gender} · ${p.ml}ml</div>
+        </div>
+        <p class="desc">${p.desc}</p>
+        <div class="pyramid">
+          <div class="pyramid-row"><span class="pyramid-label">Topo</span><span class="pyramid-notes">${p.notes.top.join(', ')}</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Coração</span><span class="pyramid-notes">${p.notes.heart.join(', ')}</span></div>
+          <div class="pyramid-row"><span class="pyramid-label">Fundo</span><span class="pyramid-notes">${p.notes.base.join(', ')}</span></div>
+        </div>
+        <div class="card-bottom">
+          <div class="price">R$ ${p.price.toFixed(2).replace('.',',')}<br><small>${p.ml}ml</small></div>
+          <a class="wa-btn" href="${waLink(msg)}" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01A7.94 7.94 0 0 0 20 11.94a7.9 7.9 0 0 0-2.4-5.62z"/></svg>
+            Falar
+          </a>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ---------- admin panel logic ---------- */
+function renderAdminList(forExport){
+  const list = document.getElementById('adminList');
+  document.getElementById('adminCount').textContent = PRODUCTS.length;
+  list.innerHTML = PRODUCTS.map(p=>{
+    const thumb = p.image ? `<img src="${resolveImageSrc(p.image, forExport)}">` : `<div class="thumb-fallback"></div>`;
+    return `
+      <div class="admin-list-item">
+        ${thumb}
+        <div class="info"><b>${p.name}</b><span>${p.family} · R$ ${p.price.toFixed(2).replace('.',',')}</span></div>
+        <div class="actions">
+          <button data-edit="${p.id}" title="Editar">✎</button>
+          <button data-remove="${p.id}" title="Remover">🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  list.querySelectorAll('[data-edit]').forEach(btn=>{
+    btn.addEventListener('click', ()=> startEdit(btn.dataset.edit));
+  });
+  list.querySelectorAll('[data-remove]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(confirm('Remover este produto?')){
+        PRODUCTS = PRODUCTS.filter(p=>p.id!==btn.dataset.remove);
+        saveDraft(); renderAdminList(); renderFilters(); renderGrid();
+      }
+    });
+  });
+}
+
+function clearForm(){
+  document.getElementById('fImage').value='';
+  document.getElementById('imgPreview').style.display='none';
+  document.getElementById('imgPreview').src='';
+  document.getElementById('imgPreview').removeAttribute('data-pending');
+  document.getElementById('fName').value='';
+  document.getElementById('fFamily').value='Amadeirado';
+  document.getElementById('fGender').value='Masculino';
+  document.getElementById('fStock').value='pronta';
+  document.getElementById('fMl').value='';
+  document.getElementById('fPrice').value='';
+  document.getElementById('fDesc').value='';
+  document.getElementById('fTop').value='';
+  document.getElementById('fHeart').value='';
+  document.getElementById('fBase').value='';
+  editingId = null;
+  document.getElementById('formTitle').textContent = 'Adicionar produto';
+  document.getElementById('saveProduct').textContent = 'Adicionar produto';
+  document.getElementById('cancelEdit').style.display = 'none';
+}
+
+function startEdit(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  editingId = id;
+  document.getElementById('fName').value = p.name;
+  document.getElementById('fFamily').value = p.family;
+  document.getElementById('fGender').value = p.gender;
+  document.getElementById('fStock').value = p.stock || 'pronta';
+  document.getElementById('fMl').value = p.ml;
+  document.getElementById('fPrice').value = p.price;
+  document.getElementById('fDesc').value = p.desc;
+  document.getElementById('fTop').value = p.notes.top.join(', ');
+  document.getElementById('fHeart').value = p.notes.heart.join(', ');
+  document.getElementById('fBase').value = p.notes.base.join(', ');
+  if(p.image){
+    const preview = document.getElementById('imgPreview');
+    preview.src = resolveImageSrc(p.image, false);
+    preview.dataset.pending = p.image;
+    preview.style.display='block';
+  } else {
+    const preview = document.getElementById('imgPreview');
+    preview.style.display='none';
+    preview.removeAttribute('data-pending');
+  }
+  document.getElementById('formTitle').textContent = 'Editar produto';
+  document.getElementById('saveProduct').textContent = 'Salvar alterações';
+  document.getElementById('cancelEdit').style.display = 'block';
+  document.getElementById('adminPanel').scrollTop = 0;
+}
+
+function resizeImage(file, maxW){
+  return new Promise((resolve)=>{
+    const isPng = file.type === 'image/png';
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const scale = Math.min(1, maxW / img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        // PNG mantém transparência; JPEG é usado só pra fotos sem fundo transparente (arquivo menor)
+        resolve(isPng ? canvas.toDataURL('image/png') : canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById('fImage').addEventListener('change', async (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const dataUrl = await resizeImage(file, 500);
+  const ext = file.type === 'image/png' ? 'png' : 'jpg';
+  const baseName = document.getElementById('fName').value || 'produto';
+  const fname = `${slugify(baseName)}-${Date.now()}.${ext}`;
+  PENDING_IMAGES[fname] = dataUrl;
+  savePendingImages();
+  const preview = document.getElementById('imgPreview');
+  preview.src = dataUrl;
+  preview.style.display = 'block';
+  preview.dataset.pending = `images/${fname}`; // caminho final, não o base64
+});
+
+document.getElementById('saveProduct').addEventListener('click', ()=>{
+  const name = document.getElementById('fName').value.trim();
+  if(!name){ alert('Digite o nome do produto.'); return; }
+  const preview = document.getElementById('imgPreview');
+  const image = preview.style.display==='block' ? (preview.dataset.pending || null) : null;
+
+  const data = {
+    name,
+    family: document.getElementById('fFamily').value,
+    gender: document.getElementById('fGender').value,
+    stock: document.getElementById('fStock').value,
+    ml: Number(document.getElementById('fMl').value) || 0,
+    price: Number(document.getElementById('fPrice').value) || 0,
+    desc: document.getElementById('fDesc').value.trim(),
+    image,
+    notes:{
+      top: document.getElementById('fTop').value.split(',').map(s=>s.trim()).filter(Boolean),
+      heart: document.getElementById('fHeart').value.split(',').map(s=>s.trim()).filter(Boolean),
+      base: document.getElementById('fBase').value.split(',').map(s=>s.trim()).filter(Boolean),
+    }
+  };
+
+  if(editingId){
+    const idx = PRODUCTS.findIndex(p=>p.id===editingId);
+    PRODUCTS[idx] = {...PRODUCTS[idx], ...data};
+  } else {
+    data.id = 'p' + Date.now();
+    PRODUCTS.push(data);
+  }
+  saveDraft();
+  renderAdminList(); renderFilters(); renderGrid();
+  clearForm();
+});
+
+document.getElementById('cancelEdit').addEventListener('click', clearForm);
+
+document.getElementById('resetDraft').addEventListener('click', ()=>{
+  if(confirm('Isso vai apagar suas edições e voltar ao catálogo original. Continuar?')){
+    localStorage.removeItem('fraganz_draft');
+    localStorage.removeItem('fraganz_pending_images');
+    PENDING_IMAGES = {};
+    loadProducts();
+    renderAdminList(); renderFilters(); renderGrid();
+    clearForm();
+  }
+});
+
+document.getElementById('downloadFile').addEventListener('click', async ()=>{
+  // 1) Descobre quais fotos novas (só existem no navegador ainda) precisam virar arquivo
+  const usedPending = [...new Set(PRODUCTS
+    .map(p=>p.image)
+    .filter(Boolean)
+    .map(path=>path.replace(/^images\//,''))
+    .filter(fname=>PENDING_IMAGES[fname])
+  )];
+
+  for(const fname of usedPending){
+    const blob = dataURLtoBlob(PENDING_IMAGES[fname]);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fname;
+    a.click();
+    URL.revokeObjectURL(url);
+    await new Promise(r=>setTimeout(r, 350)); // evita o navegador bloquear downloads em sequência
+  }
+
+  // 2) Re-renderiza usando só caminhos limpos (images/arquivo.png), nunca base64,
+  // antes de "fotografar" o HTML atual pra exportação.
+  renderGrid(true);
+  renderAdminList(true);
+
+  const newArrayText = 'const PRODUCTS_SEED = ' + JSON.stringify(PRODUCTS, null, 2) + ';';
+  const newSettingsText = 'const SETTINGS_SEED = ' + JSON.stringify({
+    familyColors: FAMILY_COLORS,
+    titleFont: TITLE_FONT
+  }, null, 2) + ';';
+
+  // Clona o documento pra não salvar o estado "destravado" da tela atual
+  // (botão visível, painel aberto etc.) junto com o arquivo.
+  const clone = document.documentElement.cloneNode(true);
+  const clonedToggle = clone.querySelector('#adminToggle');
+  if(clonedToggle) clonedToggle.removeAttribute('style');
+  const clonedPanel = clone.querySelector('#adminPanel');
+  if(clonedPanel) clonedPanel.classList.remove('open');
+  const clonedOverlay = clone.querySelector('#adminOverlay');
+  if(clonedOverlay) clonedOverlay.classList.remove('open');
+  // Trava de segurança: nunca deixa nenhuma imagem em base64 vazar pro arquivo final.
+  clone.querySelectorAll('img[src^="data:"]').forEach(img=>img.removeAttribute('src'));
+
+  let source = '<!DOCTYPE html>\n' + clone.outerHTML;
+  source = source.replace(
+    /\/\* PRODUCTS_START \*\/[\s\S]*?\/\* PRODUCTS_END \*\//,
+    '/* PRODUCTS_START */\n' + newArrayText + '\n/* PRODUCTS_END */'
+  );
+  source = source.replace(
+    /\/\* SETTINGS_START \*\/[\s\S]*?\/\* SETTINGS_END \*\//,
+    '/* SETTINGS_START */\n' + newSettingsText + '\n/* SETTINGS_END */'
+  );
+  const blob = new Blob([source], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fraganz-catalogo.html';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  // 3) Volta a exibição normal (com preview das fotos novas) pra continuar editando
+  renderGrid();
+  renderAdminList();
+
+  if(usedPending.length){
+    alert(`Baixei o HTML + ${usedPending.length} imagem(ns) nova(s):\n${usedPending.join('\n')}\n\nAntes de subir pro GitHub: mova essa(s) imagem(ns) pra dentro da pasta "images/" do site (a mesma pasta onde fica o HTML).`);
+  }
+});
+
+function checkAdminAccess(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('admin') === ADMIN_KEY){
+    document.getElementById('adminToggle').style.display = 'inline-flex';
+  }
+}
+
+document.getElementById('adminToggle').addEventListener('click', ()=>{
+  const alreadyUnlocked = sessionStorage.getItem('fraganz_admin_ok') === '1';
+  if(!alreadyUnlocked){
+    const attempt = prompt('Senha do painel de edição:');
+    if(attempt !== ADMIN_PASSWORD){
+      if(attempt !== null) alert('Senha incorreta.');
+      return;
+    }
+    sessionStorage.setItem('fraganz_admin_ok', '1');
+  }
+  document.getElementById('adminPanel').classList.add('open');
+  document.getElementById('adminOverlay').classList.add('open');
+});
+checkAdminAccess();
+function closeAdminPanel(){
+  document.getElementById('adminPanel').classList.remove('open');
+  document.getElementById('adminOverlay').classList.remove('open');
+  clearForm();
+}
+document.getElementById('closeAdmin').addEventListener('click', closeAdminPanel);
+document.getElementById('adminOverlay').addEventListener('click', closeAdminPanel);
+
+document.getElementById('headerWa').href = waLink("Olá! Vim pelo catálogo da Fraganz e quero saber mais sobre os perfumes.");
+document.getElementById('floatWa').href = waLink("Olá! Vim pelo catálogo da Fraganz e quero saber mais sobre os perfumes.");
+
+loadSettings();
+loadProducts();
+renderFilters();
+renderGrid();
+renderFamilyColors();
+const fTitleFontEl = document.getElementById('fTitleFont');
+fTitleFontEl.value = TITLE_FONT;
+fTitleFontEl.addEventListener('change', () => {
+  TITLE_FONT = fTitleFontEl.value;
+  document.documentElement.style.setProperty('--title-font', TITLE_FONT);
+  saveSettings();
+});
+renderAdminList();
+</script>
+
+
+
+<div id="cpn-wrapper" style="display: block;"></div><!-- Cloudflare Pages Analytics --><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;d9b19555ff824661a45521e7016a2cec&quot;}"></script><!-- Cloudflare Pages Analytics -->
+</body></html>
